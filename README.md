@@ -17,7 +17,8 @@ The backend is powered by Flask and Appwrite, exposing a clean API for users, no
     
     Modular Architecture Routes, services, models, and utils organized for long-term maintainability.
 
-    🏗 Project Structure
+🏗 Project Structure
+    Structure
         notenest-backend/
         ├── app.py
         ├── requirements.txt
