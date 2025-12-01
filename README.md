@@ -18,7 +18,7 @@ The backend is powered by Flask and Appwrite, exposing a clean API for users, no
     Modular Architecture Routes, services, models, and utils organized for long-term maintainability.
 
 🏗 Project Structure
-notenest-backend/
+    notenest-backend/
     ├── app.py
     ├── requirements.txt
     ├── .env.example
@@ -51,8 +51,8 @@ Each feature lives in its own route and service. Validation and error-handling a
 
 Clone the repo:
 
-git clone https://github.com/yourusername/notenest-backend.git
-cd notenest-backend
+    git clone https://github.com/deanb391/notenest-backend.git
+    cd notenest-backend
 
 
 *Install dependencies:*
@@ -67,64 +67,67 @@ cd notenest-backend
 
 Fill in your environment variables:
 
-Appwrite endpoint
+    Appwrite endpoint
+    
+    Appwrite project ID
+    
+    Database and collection IDs
+    
+    Paystack keys
+    
+    File settings
 
-Appwrite project ID
-
-Database and collection IDs
-
-Paystack keys
-
-File settings
 
 ▶️ Running the Server
 
 Run directly:
 
-python app.py
+    python app.py
 
 
 Or via Flask CLI:
 
-flask run
+    flask run
 
 
 Default address:
 
-http://localhost:5000
+    http://localhost:5000
 
 🔌 API Overview
 
 All endpoints live under /api/.
 
-Area	Base Path	Description
-Users	/api/users	Authentication, profiles
-Notes	/api/notes	CRUD notes and organization
-Payments	/api/payments	Credit purchases and Paystack verification
-Files	/api/files	Upload, download, delete
+    Area	Base Path	Description
+    Users	/api/users	Authentication, profiles
+    Notes	/api/notes	CRUD notes and organization
+    Payments	/api/payments	Credit purchases and Paystack verification
+    Files	/api/files	Upload, download, delete
 
 A complete API collection will be added soon.
+
 
 ☁️ Deployment (Render)
 
 This repo includes:
 
-.render.yaml for automated deployment
-
-Production environment configuration
-
-Automatically triggered deploys from GitHub
-
-Connect the repo to Render and deploy both services as defined.
+    .render.yaml for automated deployment
+    
+    Production environment configuration
+    
+    Automatically triggered deploys from GitHub
+    
+    Connect the repo to Render and deploy both services as defined.
+    
 
 🛠 Development Notes
 
-Routes handle request/response only.
-
-Business logic lives in the service layer.
-
-Validation schemas keep data clean.
-
-Centralized authentication and error-handling make behavior consistent.
-
-The structure is designed for growth, testing, and easy onboarding of new contributors.
+    Routes handle request/response only.
+    
+    Business logic lives in the service layer.
+    
+    Validation schemas keep data clean.
+    
+    Centralized authentication and error-handling make behavior consistent.
+    
+    The structure is designed for growth, testing, and easy onboarding of new contributors.
