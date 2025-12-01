@@ -18,31 +18,31 @@ The backend is powered by Flask and Appwrite, exposing a clean API for users, no
     Modular Architecture Routes, services, models, and utils organized for long-term maintainability.
 
 🏗 Project Structure
-    notenest-backend/
-    ├── app.py
-    ├── requirements.txt
-    ├── .env.example
-    ├── .render.yaml
-    ├── config/
-    │   └── appwrite.py
-    ├── routes/
-    │   ├── notes.py
-    │   ├── users.py
-    │   ├── payments.py
-    │   └── files.py
-    ├── services/
-    │   ├── notes_service.py
-    │   ├── users_service.py
-    │   ├── payments_service.py
-    │   └── files_service.py
-    ├── models/
-    │   └── schemas.py
-    ├── utils/
-    │   ├── auth.py
-    │   ├── validation.py
-    │   └── errors.py
-    └── chroma/
-        └── chroma_setup.py
+        notenest-backend/
+        ├── app.py
+        ├── requirements.txt
+        ├── .env.example
+        ├── .render.yaml
+        ├── config/
+        │   └── appwrite.py
+        ├── routes/
+        │   ├── notes.py
+        │   ├── users.py
+        │   ├── payments.py
+        │   └── files.py
+        ├── services/
+        │   ├── notes_service.py
+        │   ├── users_service.py
+        │   ├── payments_service.py
+        │   └── files_service.py
+        ├── models/
+        │   └── schemas.py
+        ├── utils/
+        │   ├── auth.py
+        │   ├── validation.py
+        │   └── errors.py
+        └── chroma/
+            └── chroma_setup.py
 
 
 Each feature lives in its own route and service. Validation and error-handling are centralized so the codebase stays clean as the app grows.
