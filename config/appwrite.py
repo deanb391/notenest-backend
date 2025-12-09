@@ -2,6 +2,7 @@ import os
 from appwrite.client import Client
 from appwrite.services.databases import Databases
 from appwrite.services.account import Account
+from appwrite.services.avatars import Avatars
 from appwrite.services.storage import Storage
 from dotenv import load_dotenv
 
@@ -24,6 +25,7 @@ client = get_client()
 database = Databases(client=client)
 account = Account(client=client)
 storage = Storage(client=client)
+avatars = Avatars(client=client)
 
 COLLECTIONS = {
     "users": os.getenv("APPWRITE_USERS_COL_ID"),
@@ -33,5 +35,6 @@ COLLECTIONS = {
     "subscription": os.getenv("APPWRITE_SUBSCRIPTIONS_COL_ID"),
     "feedback": os.getenv("APPWRITE_FEEDBACK_COL_ID"),
     "quotes": os.getenv("APPWRITE_QUOTES_COL_ID"),
-    "plans": os.getenv("APPWRITE_PLANS_COL_ID")
+    "plans": os.getenv("APPWRITE_PLANS_COL_ID"),
+    "catchphrases": os.getenv("APPWRITE_PHRASE_COL_ID")
 }

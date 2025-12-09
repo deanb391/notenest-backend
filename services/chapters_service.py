@@ -40,22 +40,27 @@ ALLOWED_FILTERS = {
 }
 
 def query_chapters(filters):
-    queries = []
+    try:
+        queries = []
 
-    for key, val in filters.items():
-        if key not in ALLOWED_FILTERS:
-            raise KeyError(f"Filter '{key}' is not allowed")
-        appwrite_field = ALLOWED_FILTERS[key]
-        queries.append(Query.equal(appwrite_field, val))
+        for key, val in filters.items():
+            if key not in ALLOWED_FILTERS:
+                raise KeyError(f"Filter '{key}' is not allowed")
+            appwrite_field = ALLOWED_FILTERS[key]
+            queries.append(Query.equal(appwrite_field, val))
 
-    results = database.list_documents(
-        database_id=DB_ID,
-        collection_id=CHAPTER_COL,
-        queries=queries
-    )
-    print("RESULT", results)
+        results = database.list_documents(
+            database_id=DB_ID,
+            collection_id=CHAPTER_COL,
+            queries=queries
+        )
+        print("RESULT", results)
 
-    return results['documents']
+        return results['documents']
+    
+    except Exception as e:
+        raise e
+        
 
 
 
@@ -69,7 +74,7 @@ def get_chapter(chapter_id):
         )
         return res
     except Exception as e:
-        return e
+        raise e
 
 
 def update_chapter(chapter_id: str, data: dict):
@@ -83,7 +88,7 @@ def update_chapter(chapter_id: str, data: dict):
         return res
     
     except Exception as e:
-        return e
+        raise e
 
 
 def delete_chapter(chapter_id: str):
@@ -96,5 +101,5 @@ def delete_chapter(chapter_id: str):
         return True
     
     except Exception as e:
-        return e
+        raise e
     
