@@ -3,9 +3,12 @@ from appwrite.id import ID
 from appwrite.query import Query
 from typing import TypeVar, List
 import os
-from ai_features.note_generation.main import main
+from ai_features.new_note_regeneration.main import main
+from utils.text_standardizer import parse_to_sections
+from utils.file_storage import get_file
+import json
 
-from services.files_service import get_file_url, upload_file
+
 
 T = TypeVar('T')
 
@@ -23,6 +26,8 @@ def create_chapter(data: dict):
         data=data
     )
 
+    return new_doc
+
 def cut_text(text: str, length: int = 100) -> str:
     # THis function gets the description of the chapter by cutting the regenerated note and returning the first 100 chars
     if not isinstance(text, str):
@@ -38,25 +43,35 @@ def generate_chapter(note_id, fileObj: List[T]):
     try:
         urls = []
 
-        # For each object, upload the file and add the url to the list
-        for obj in fileObj:
-            saved = upload_file(obj)
-            url = get_file_url(saved["$id"])
-            image_urls += url
+        # For each object add the url to the list
+        for file_obj in fileObj:
+            print("File Object:", file_obj)
+            url = get_file(file_obj)
+            print("File url: ", url)
+            urls.append(url)
+
+        # response = get_chapter("6949832c003d6d7674e2")
 
         # Generate new note from ai
-        chapter = main(urls)
 
-        #Upload Note to appwrite and get the response body
+        chapter = main(urls)
+        print("PRekmoeme: ", chapter)
+        standard_text = parse_to_sections(chapter)
+        
+        # # FIX: Use json.dumps() to get a string, NOT jsonify()
+        content_to_upload = json.dumps(standard_text) 
+
+        # # Upload Note to appwrite and get the response body
         response = create_chapter({
             "noteId": note_id,
-            "title": chapter['title'],
-            "content": chapter["content"],
-            "description": cut_text(chapter['content']),
-            "file": urls
+            "title": 'Biscuit',
+            "content": content_to_upload,
+            "description": cut_text(chapter),
+            "file": "nothing"
         })
 
         # Return response to route function
+        print("Response: ", response)
         return response
 
     except Exception as e:
@@ -69,7 +84,10 @@ def fetchAll(user_id: str):
         chapters = database.list_documents(
             database_id=DB_ID,
             collection_id=CHAPTER_COL,
-            queries=[Query.equal("users", user_id)]
+            queries=[
+                Query.equal("users", user_id),
+                Query.order_desc("$createdAt")
+                ]
         )
         return chapters
     except Exception as e:
@@ -93,6 +111,9 @@ def query_chapters(filters):
                 raise KeyError(f"Filter '{key}' is not allowed")
             appwrite_field = ALLOWED_FILTERS[key]
             queries.append(Query.equal(appwrite_field, val))
+
+        queries.append(Query.order_desc("$createdAt"))
+        
 
         results = database.list_documents(
             database_id=DB_ID,

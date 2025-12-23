@@ -14,7 +14,8 @@ def create():
     # except Exception as e:
     #     return jsonify({"error": str(e)}), 400
     
-    note = create_note(body)
+    note = create_note(body['data'])
+    print("Result: ", note)
     return jsonify({"data": note}), 201
 
 
@@ -41,7 +42,7 @@ def fetch(note_id):
 def update(note_id):
     body = request.get_json()
 
-    note = update_note(note_id, body)
+    note = update_note(note_id, body['data'])
     return jsonify({"data": note})
 
 

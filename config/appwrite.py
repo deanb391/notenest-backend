@@ -27,6 +27,8 @@ account = Account(client=client)
 storage = Storage(client=client)
 avatars = Avatars(client=client)
 
+
+
 COLLECTIONS = {
     "users": os.getenv("APPWRITE_USERS_COL_ID"),
     "notes": os.getenv('APPWRITE_NOTES_COL_ID'),
@@ -36,5 +38,9 @@ COLLECTIONS = {
     "feedback": os.getenv("APPWRITE_FEEDBACK_COL_ID"),
     "quotes": os.getenv("APPWRITE_QUOTES_COL_ID"),
     "plans": os.getenv("APPWRITE_PLANS_COL_ID"),
-    "catchphrases": os.getenv("APPWRITE_PHRASE_COL_ID")
+    "catchphrases": os.getenv("APPWRITE_PHRASE_COL_ID"),
+    "video_watch": os.getenv("APPWRITE_VIDEO_COL_ID"),
+    "exam_score": os.getenv("APPWRITE_EXAM_COL_ID"),
+    "read_time": os.getenv("APPWRITE_READ_COL_ID"),
+    "push_tokens": os.getenv("APPWRITE_PUSH_TOKEN_COL_ID")
 }

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from services.user_service import create_user, get_user, delete_user, update_user, query_users
+from services.user_service import create_user, get_user, delete_user, update_user, query_users, add_streak, reset_streak
 from utils.limiter import limiter
 
 bp = Blueprint("users", __name__, url_prefix="/api/users")
@@ -28,6 +28,24 @@ def get_chapters():
     data = query_users(filters)
     return {"data": data}, 200
 
+@bp.get("/streak/add/<user_id>")
+@limiter.limit("10 per minute")
+def add(user_id):
+
+    response = add_streak(user_id=user_id)
+    return {"data": response}, 200
+
+
+
+@bp.get("/streak/reset/<user_id>")
+@limiter.limit("10 per minute")
+def reset(user_id):
+
+    response = reset_streak(user_id=user_id)
+    return {"data": response}, 200
+
+
+
 @bp.get("/<user_id>")
 @limiter.limit("10 per minute")
 def fetch(user_id):
@@ -41,10 +59,10 @@ def fetch(user_id):
 @limiter.limit("10 per minute")
 def update(user_id):
     body = request.get_json()
-    print("Data: ", body['data'])
+    data = body['data']
+    dataa = data['data']
 
-    user = update_user(user_id, body['data'])
-    print("User: ", user)
+    user = update_user(user_id, dataa)
     return jsonify({"data": user})
 
 

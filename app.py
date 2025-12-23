@@ -10,6 +10,10 @@ from routes.plans import bp as plan_bp
 from routes.subscriptions import bp as subs_bp
 from routes.files import bp as files_bp
 from routes.phrase import bp as phrase_bp
+from routes.exam_score import bp as exam_bp
+from routes.video_watch import bp as video_bp
+from routes.read_time import bp as read_bp
+from routes.push import bp as push_bp
 
 from utils.error import register_error_handlers
 from utils.limiter import limiter
@@ -37,7 +41,10 @@ app.register_blueprint(plan_bp)
 app.register_blueprint(subs_bp)
 app.register_blueprint(files_bp)
 app.register_blueprint(phrase_bp)
-
+app.register_blueprint(video_bp)
+app.register_blueprint(exam_bp)
+app.register_blueprint(read_bp)
+app.register_blueprint(push_bp)
 
 
 @app.get("/health")

@@ -70,13 +70,11 @@ def query_users(filters):
             appwrite_field = ALLOWED_FILTERS[key]
             queries.append(Query.equal(appwrite_field, val))
 
-        print("RRR", queries)
         results = database.list_documents(
             database_id=DB_ID,
             collection_id=USER_COL,
             queries=queries
         )
-        print("RESULT", results)
 
         return results['documents']
     except Exception as e:
@@ -106,6 +104,27 @@ def update_user(user_id: str, data: dict):
             data=data
         )
         return res
+    
+    except Exception as e:
+        raise e
+
+def add_streak(user_id: str):
+    try:
+        user = get_user(user_id)
+        new_streak = user['streak'] + 1
+        res = update_user(user_id=user_id, data={"streak": new_streak})
+        return {"Success": True}
+    
+    except Exception as e:
+        raise e
+    
+
+
+
+def reset_streak(user_id: str):
+    try:
+        res = update_user(user_id=user_id, data={"streak": 1})
+        return {"Success": True}
     
     except Exception as e:
         raise e

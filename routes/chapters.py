@@ -32,13 +32,20 @@ def create():
 @bp.post("/generate")
 @limiter.limit("5 per minute")
 def generate():
-    if "files" not in request.files:
-        return jsonify({"error": "No file uploaded"}), 400
-    note_id = request.files['note_id']
-    files_obj = request.files["files"]
-    response = generate_chapter(note_id, files_obj)
+    print("Form data:", request.form)
+    print("Files:", request.files)
 
+    note_id = request.form.get("note_id")
+    if not note_id:
+        return jsonify({"error": "note_id missing"}), 400
+
+    files_obj = request.files.getlist("files")
+    if not files_obj:
+        return jsonify({"error": "No files uploaded"}), 400
+
+    response = generate_chapter(note_id, files_obj)
     return jsonify({"data": response})
+
 
 
 @bp.get("/user/<user_id>")
