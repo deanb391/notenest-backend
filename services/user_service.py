@@ -13,7 +13,7 @@ def get_avatar_url(user_name, size=100):
     encoded_name = quote(user_name)
     
     # Construct the full URL
-    url = f"{os.getenv("APPWRITE_ENDPOINT")}/avatars/initials?name={encoded_name}&width={size}&height={size}"
+    url = f"{os.getenv('APPWRITE_ENDPOINT')}/avatars/initials?name={encoded_name}&width={size}&height={size}"
     
     # Note: Appwrite automatically handles the project ID via the 'X-Appwrite-Project' header
     # or infers it if you are using the client SDK correctly in a client context.
