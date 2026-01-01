@@ -84,7 +84,12 @@ def generate_chapter(note_id, user_id, fileObj: List[T]):
         send_push_notification(
             user_id=user_id, 
             title=f"Hey, {user['username']}",
-            body="Your Note Is Ready"
+            body="Your Note Is Ready",
+            data={
+                "type": "chapter",
+                "chapter_id": response['$id'],
+                "user_id": user_id
+            }
             )
 
         return response
