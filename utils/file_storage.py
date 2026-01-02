@@ -19,9 +19,11 @@ def get_file(file_obj):
         # Image preprocessing
         if suffix in [".jpg", ".jpeg", ".png", ".webp"]:
             with Image.open(temp_path) as img:
+                print("Image Size: ", img.size)
                 img = img.convert("RGB")
                 img.thumbnail(MAX_SIZE)
                 img.save(temp_path, format="JPEG", quality=85)
+                print("IMage size after: ", img.size)
 
         return temp_path
     except Exception as e:
