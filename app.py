@@ -86,6 +86,13 @@ def _track_after_request(response):
         _metrics["bytes_out"] += length
     return response
 
+@app.get("/oauth-redirect")
+def redirect():
+    #Return the template
+    return render_template(
+        "oauth_redirect.html"
+    )
+
 
 @app.get("/health")
 def health():

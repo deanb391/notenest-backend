@@ -50,5 +50,5 @@ def update(note_id):
 @limiter.limit("10 per minute")
 def delete(note_id):
     response = delete_note(note_id)
-    print("Response: ", )
+    print("Response: ", response)
     return jsonify({"success": response}), 204
